@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>결(GYEOL) | 한복 디자이너 포트폴리오</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Noto Serif KR (명조) & Noto Sans KR / Pretendard -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Theme Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Noto Serif KR"', 'Georgia', 'serif'],
+            sans: ['Pretendard', '"Noto Sans KR"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          colors: {
+            hanji: {
+              50: '#FDFBF7',
+              100: '#FAF6F0',
+              200: '#F4ECE1',
+              300: '#E8DDD0',
+              400: '#D6C7B4',
+            },
+            ink: {
+              900: '#2A2420',
+              700: '#4A403A',
+              500: '#75685F',
+              300: '#A3968C',
+            },
+            terracotta: {
+              500: '#B85D43',
+              600: '#9E4B33',
+              100: '#F5E6E1',
+            },
+            gold: {
+              500: '#C59B5F',
+              600: '#A88047',
+              100: '#F7EFE2',
+            },
+            celadon: {
+              500: '#7E8C7D',
+              100: '#EBF0EB',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Base Warm Hanji Texture & Typography */
+    body {
+      background-color: #FAF6F0;
+      color: #2A2420;
+      word-break: keep-all;
+      overflow-x: hidden;
+    }
+
+    /* Subtle Korean Hanji Paper Grain Overlay */
+    .hanji-texture {
+      background-image: radial-gradient(rgba(197, 155, 95, 0.08) 1px, transparent 0),
+                        radial-gradient(rgba(42, 36, 32, 0.04) 1px, transparent 0);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
+    }
+
+    /* Traditional Korean Changsal (Lattice) Decorative Frame */
+    .changsal-pattern {
+      background-image: 
+        linear-gradient(to right, rgba(197, 155, 95, 0.14) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(197, 155, 95, 0.14) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Smooth Page Transitions */
+    .page-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .page-view.active {
+      display: block;
+    }
+    .page-view.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Warm Oriental Photo Treatment */
+    .oriental-warm-img {
+      filter: sepia(12%) saturate(108%) contrast(98%) brightness(97%);
+    }
+
+    /* Fallback Gradient if External Image Fails */
+    .hanbok-fallback-bg {
+      background: linear-gradient(135deg, #3D2E26 0%, #6D4C3D 45%, #B85D43 100%);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF6F0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D6C7B4;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C59B5F;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased hanji-texture min-h-screen flex flex-col selection:bg-terracotta-100 selection:text-ink-900">
+
+  <!-- ===================================================================== -->
+  <!-- TOP NAVIGATION HEADER (4 PAGES MENU) -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 bg-hanji-100/90 backdrop-blur-md border-b border-hanji-300/80 transition-colors">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
+      
+      <!-- Brand Emblem / Logo -->
+      <button onclick="navigateTo('home')" class="flex items-center gap-3 text-left group focus:outline-none">
+        <!-- Traditional Red Seal Emblem -->
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg border-2 border-terracotta-500 flex items-center justify-center bg-hanji-50 shadow-sm group-hover:bg-terracotta-500 transition-colors">
+          <span class="font-serif font-bold text-base sm:text-lg text-terracotta-500 group-hover:text-hanji-50 transition-colors">結</span>
+        </div>
+        <div>
+          <span class="block font-serif font-bold text-base sm:text-lg tracking-wider text-ink-900">아틀리에 결</span>
+          <span class="block text-[10px] sm:text-[11px] tracking-[0.2em] text-ink-500 uppercase">HANBOK DESIGNER</span>
+        </div>
+      </button>
+
+      <!-- Desktop Navigation Menu (Exact 4 Labels) -->
+      <nav aria-label="주 메뉴" class="hidden md:flex items-center gap-2 lg:gap-4">
+        <button onclick="navigateTo('home')" data-nav="home" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all text-ink-700 hover:text-terracotta-500">
+          홈
+        </button>
+        <button onclick="navigateTo('about')" data-nav="about" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all text-ink-700 hover:text-terracotta-500">
+          자기소개
+        </button>
+        <button onclick="navigateTo('works')" data-nav="works" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all text-ink-700 hover:text-terracotta-500">
+          작품소개
+        </button>
+        <button onclick="navigateTo('closing')" data-nav="closing" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all text-ink-700 hover:text-terracotta-500">
+          마지막 말
+        </button>
+      </nav>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="메뉴 열기" class="md:hidden p-2.5 rounded-xl border border-hanji-300 text-ink-900 hover:bg-hanji-200 transition-colors">
+        <svg id="icon-menu-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="icon-menu-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden bg-hanji-50 border-b border-hanji-300 px-5 py-4 space-y-1.5 shadow-sm">
+      <button onclick="navigateTo('home'); toggleMobileMenu();" data-nav="home" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-ink-900 hover:bg-hanji-200 transition-colors">
+        홈
+      </button>
+      <button onclick="navigateTo('about'); toggleMobileMenu();" data-nav="about" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-ink-900 hover:bg-hanji-200 transition-colors">
+        자기소개
+      </button>
+      <button onclick="navigateTo('works'); toggleMobileMenu();" data-nav="works" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-ink-900 hover:bg-hanji-200 transition-colors">
+        작품소개
+      </button>
+      <button onclick="navigateTo('closing'); toggleMobileMenu();" data-nav="closing" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-ink-900 hover:bg-hanji-200 transition-colors">
+        마지막 말
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- MAIN CONTENT CONTAINER (4 PAGES) -->
+  <!-- ===================================================================== -->
+  <main class="flex-1">
+
+    <!-- =================================================================== -->
+    <!-- PAGE 1: 홈 (LANDING PAGE - WARM ORIENTAL HANBOK AESTHETIC) -->
+    <!-- =================================================================== -->
+    <section id="page-home" class="page-view active visible">
+      <!-- Oriental Framed Hero Banner -->
+      <div class="relative overflow-hidden changsal-pattern py-10 sm:py-16 lg:py-20 px-5 sm:px-8">
+        <div class="max-w-6xl mx-auto">
+          
+          <!-- Warm Oriental Frame Container -->
+          <div class="relative rounded-[2rem] overflow-hidden border border-gold-500/40 shadow-xl bg-hanji-200">
+            <!-- Hero Hanbok Visual -->
+            <div class="relative h-[520px] sm:h-[600px] lg:h-[650px] hanbok-fallback-bg">
+              <img
+                src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1800&q=85"
+                alt="전통의 고운 선을 담은 한복의 자태"
+                class="w-full h-full object-cover object-center oriental-warm-img scale-102"
+                onerror="this.src='https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=1800&q=85'"
+              />
+              <!-- Warm Golden-Ink Gradient Overlay -->
+              <div class="absolute inset-0 bg-gradient-to-r from-[#231B16]/85 via-[#2A2420]/55 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-[#231B16]/75 via-transparent to-[#C59B5F]/15"></div>
+
+              <!-- Traditional Corner Ornaments -->
+              <div class="hidden sm:block absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 border-gold-500/70 rounded-tl-xl pointer-events-none"></div>
+              <div class="hidden sm:block absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 border-gold-500/70 rounded-tr-xl pointer-events-none"></div>
+              <div class="hidden sm:block absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-2 border-gold-500/70 rounded-bl-xl pointer-events-none"></div>
+              <div class="hidden sm:block absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 border-gold-500/70 rounded-br-xl pointer-events-none"></div>
+
+              <!-- Poetic Hero Copy Overlay -->
+              <div class="absolute inset-0 flex items-center px-7 sm:px-14 lg:px-20">
+                <div class="max-w-2xl text-hanji-50">
+                  <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-hanji-50/10 border border-gold-500/40 backdrop-blur-sm text-xs sm:text-sm text-gold-100 tracking-widest mb-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>
+                    전통 한복 디자이너 · 윤서연
+                  </div>
+
+                  <h1 class="font-serif text-3xl sm:text-5xl lg:text-[54px] font-bold leading-[1.28] tracking-tight text-hanji-50 mb-6">
+                    결을 짓고, 시간을 입히다<br />
+                    <span class="text-gold-100 font-normal text-2xl sm:text-4xl block mt-2">
+                      전통의 선을 현대의 숨결로 잇다
+                    </span>
+                  </h1>
+
+                  <p class="text-sm sm:text-base lg:text-lg text-hanji-200/90 leading-relaxed max-w-xl mb-9 font-light">
+                    바람이 스치는 명주의 부드러운 곡선과 자연에서 얻은 온화한 빛깔을 담아,<br class="hidden sm:inline" />
+                    오늘의 일상과 가장 빛나는 순간에 스며드는 한복을 짓습니다.
+                  </p>
+
+                  <!-- Hero CTA Buttons -->
+                  <div class="flex flex-wrap items-center gap-3.5">
+                    <button onclick="navigateTo('works')" class="px-6 py-3.5 rounded-full bg-terracotta-500 hover:bg-terracotta-600 text-hanji-50 text-sm sm:text-base font-medium shadow-md transition-all flex items-center gap-2">
+                      <span>작품 둘러보기</span>
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </button>
+                    <button onclick="navigateTo('about')" class="px-6 py-3.5 rounded-full bg-hanji-50/15 hover:bg-hanji-50/25 border border-hanji-200/40 text-hanji-50 text-sm sm:text-base font-medium backdrop-blur-sm transition-all">
+                      디자이너 소개
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Poetic Quote Divider -->
+          <div class="max-w-3xl mx-auto text-center py-14 sm:py-20 px-4">
+            <span class="font-serif text-2xl text-gold-600 block mb-3">“</span>
+            <p class="font-serif text-lg sm:text-2xl text-ink-900 leading-relaxed font-medium">
+              한복은 입는 사람의 걸음걸이와 호흡이 더해질 때 비로소 완성되는<br class="hidden sm:inline" />
+              살아 있는 여백의 예술입니다.
+            </p>
+            <div class="mt-5 flex items-center justify-center gap-3 text-xs tracking-widest text-ink-500 uppercase">
+              <span class="w-8 h-px bg-gold-500/60"></span>
+              <span>ATELIER GYEOL</span>
+              <span class="w-8 h-px bg-gold-500/60"></span>
+            </div>
+          </div>
+
+          <!-- Quick Preview Cards Linking to Pages 2, 3, 4 -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pb-8">
+            <!-- Card -> 자기소개 -->
+            <div onclick="navigateTo('about')" class="group cursor-pointer bg-hanji-50 rounded-3xl p-7 border border-hanji-300/90 hover:border-gold-500 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-5">
+                  <span class="text-xs font-semibold tracking-widest text-terracotta-500">02 · ABOUT ME</span>
+                  <span class="w-9 h-9 rounded-full bg-hanji-200 group-hover:bg-terracotta-500 group-hover:text-hanji-50 flex items-center justify-center transition-colors text-ink-700">
+                    ↗
+                  </span>
+                </div>
+                <h2 class="font-serif text-xl sm:text-2xl font-bold text-ink-900 mb-3">자기소개</h2>
+                <p class="text-sm text-ink-700 leading-relaxed">
+                  전통 한복의 고운 선과 현대적 실용성의 조화를 탐구하는 디자이너의 철학과 작업 여정을 소개합니다.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-hanji-200 text-xs font-medium text-gold-600 group-hover:text-terracotta-500 transition-colors">
+                디자이너 이야기 읽기 →
+              </div>
+            </div>
+
+            <!-- Card -> 작품소개 -->
+            <div onclick="navigateTo('works')" class="group cursor-pointer bg-hanji-50 rounded-3xl p-7 border border-hanji-300/90 hover:border-gold-500 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-5">
+                  <span class="text-xs font-semibold tracking-widest text-terracotta-500">03 · WORKS</span>
+                  <span class="w-9 h-9 rounded-full bg-hanji-200 group-hover:bg-terracotta-500 group-hover:text-hanji-50 flex items-center justify-center transition-colors text-ink-700">
+                    ↗
+                  </span>
+                </div>
+                <h2 class="font-serif text-xl sm:text-2xl font-bold text-ink-900 mb-3">작품소개</h2>
+                <p class="text-sm text-ink-700 leading-relaxed">
+                  전통 예복부터 일상에 스며드는 모던 한복, 혼례복까지 원단과 배색의 깊이를 담은 컬렉션입니다.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-hanji-200 text-xs font-medium text-gold-600 group-hover:text-terracotta-500 transition-colors">
+                컬렉션 감상하기 →
+              </div>
+            </div>
+
+            <!-- Card -> 마지막 말 -->
+            <div onclick="navigateTo('closing')" class="group cursor-pointer bg-hanji-50 rounded-3xl p-7 border border-hanji-300/90 hover:border-gold-500 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-5">
+                  <span class="text-xs font-semibold tracking-widest text-terracotta-500">04 · CLOSING</span>
+                  <span class="w-9 h-9 rounded-full bg-hanji-200 group-hover:bg-terracotta-500 group-hover:text-hanji-50 flex items-center justify-center transition-colors text-ink-700">
+                    ↗
+                  </span>
+                </div>
+                <h2 class="font-serif text-xl sm:text-2xl font-bold text-ink-900 mb-3">마지막 말</h2>
+                <p class="text-sm text-ink-700 leading-relaxed">
+                  한복의 아름다움을 오늘의 삶 속에서 이어가고자 하는 마음과 맞춤 제작·상담 안내를 전합니다.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-hanji-200 text-xs font-medium text-gold-600 group-hover:text-terracotta-500 transition-colors">
+                맺음말 및 문의하기 →
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Page Navigation -->
+          <div class="mt-10 pt-8 border-t border-hanji-300 flex items-center justify-between">
+            <span class="text-xs text-ink-500">01 / 04 · 홈</span>
+            <button onclick="navigateTo('about')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink-900 text-hanji-50 text-sm font-medium hover:bg-terracotta-500 transition-colors">
+              <span>다음 페이지: 자기소개</span>
+              <span>→</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- PAGE 2: 자기소개 (ABOUT ME - CLEAN MINIMALIST EDITORIAL STYLE) -->
+    <!-- =================================================================== -->
+    <section id="page-about" class="page-view bg-hanji-50/90">
+      <div class="max-w-5xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+        
+        <!-- Clean Page Header -->
+        <div class="border-b border-hanji-300 pb-8 mb-12 sm:mb-16">
+          <span class="text-xs font-semibold tracking-[0.2em] text-terracotta-500 uppercase block mb-2">02 · ABOUT THE DESIGNER</span>
+          <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-ink-900">자기소개</h1>
+          <p class="mt-3 text-base sm:text-lg text-ink-500 font-normal">
+            전통 한복의 고운 선과 현대적 실용성의 조화
+          </p>
+        </div>
+
+        <!-- Profile & Philosophy Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-20">
+          <!-- Left: Clean Framed Atelier / Textile Image (5 cols) -->
+          <div class="lg:col-span-5">
+            <div class="relative rounded-3xl overflow-hidden bg-hanji-200 border border-hanji-300 aspect-[4/5] shadow-sm">
+              <img
+                src="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=900&q=85"
+                alt="천연 염색 원단과 한복 작업실 풍경"
+                class="w-full h-full object-cover object-center oriental-warm-img"
+                onerror="this.style.display='none'"
+              />
+              <div class="absolute bottom-4 left-4 right-4 bg-hanji-50/90 backdrop-blur-md rounded-2xl p-4 border border-hanji-300/80">
+                <p class="font-serif text-sm font-bold text-ink-900">윤서연 (Yoon Seo-yeon)</p>
+                <p class="text-xs text-ink-500 mt-0.5">아틀리에 결 대표 디자이너 · 전통 복식 연구가</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Philosophy & Narrative (7 cols) -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-block px-3 py-1 rounded-full bg-gold-100 text-gold-600 text-xs font-semibold">
+              디자인 철학
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 leading-snug">
+              “과거의 박제된 유물이 아닌,<br />오늘의 숨결로 입는 우리 옷을 만듭니다.”
+            </h2>
+            <div class="space-y-4 text-sm sm:text-base text-ink-700 leading-relaxed">
+              <p>
+                안녕하세요. 한복 디자이너 윤서연입니다. 유년 시절 외할머니의 바느질 상자 곁에서 명주와 모시가 주는 고요한 바스락거림을 처음 만났습니다. 직선으로 재단되지만 입는 이의 몸을 감싸며 유려한 곡선을 만들어내는 한복의 구조는 제게 늘 경이로움이었습니다.
+              </p>
+              <p>
+                저는 조선 시대의 기품 있는 배래선과 동정의 비례를 깊이 연구하는 동시에, 현대인의 활동성과 감각에 자연스럽게 어우러지는 실루엣을 고민합니다. 과한 장식을 덜어내고 원단 본연의 결(Texture)과 은은한 천연 염색의 농담으로 품격을 완성합니다.
+              </p>
+            </div>
+
+            <!-- Key Values Strip -->
+            <div class="grid grid-cols-3 gap-4 pt-4">
+              <div class="p-4 rounded-2xl bg-hanji-100 border border-hanji-300/70">
+                <span class="font-serif text-lg font-bold text-terracotta-500 block">자연 소재</span>
+                <span class="text-xs text-ink-500 mt-1 block">국내산 명주·모시·옥사</span>
+              </div>
+              <div class="p-4 rounded-2xl bg-hanji-100 border border-hanji-300/70">
+                <span class="font-serif text-lg font-bold text-terracotta-500 block">천연 배색</span>
+                <span class="text-xs text-ink-500 mt-1 block">쪽·치자·홍화의 은은한 색</span>
+              </div>
+              <div class="p-4 rounded-2xl bg-hanji-100 border border-hanji-300/70">
+                <span class="font-serif text-lg font-bold text-terracotta-500 block">맞춤 공예</span>
+                <span class="text-xs text-ink-500 mt-1 block">한 땀씩 완성하는 수작업</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4-Step Craftsmanship Process -->
+        <div class="mb-20">
+          <div class="mb-8">
+            <span class="text-xs font-semibold tracking-widest text-gold-600 uppercase">CRAFTSMANSHIP PROCESS</span>
+            <h3 class="font-serif text-2xl font-bold text-ink-900 mt-1">한 벌의 한복이 지어지는 과정</h3>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="bg-hanji-100/70 rounded-2xl p-6 border border-hanji-300/80">
+              <span class="font-serif text-sm font-bold text-terracotta-500">01</span>
+              <h4 class="font-serif text-lg font-bold text-ink-900 mt-2 mb-2">원단 선정</h4>
+              <p class="text-xs sm:text-sm text-ink-700 leading-relaxed">
+                계절과 입는 이의 분위기에 맞춰 진주 실크, 한산 모시, 무명 등 최적의 직물을 선별합니다.
+              </p>
+            </div>
+            <div class="bg-hanji-100/70 rounded-2xl p-6 border border-hanji-300/80">
+              <span class="font-serif text-sm font-bold text-terracotta-500">02</span>
+              <h4 class="font-serif text-lg font-bold text-ink-900 mt-2 mb-2">천연 염색 및 배색</h4>
+              <p class="text-xs sm:text-sm text-ink-700 leading-relaxed">
+                치자, 꼭두서니, 쪽 등 자연의 안료로 깊고 차분한 색감을 들이고 치마와 저고리의 조화를 맞춥니다.
+              </p>
+            </div>
+            <div class="bg-hanji-100/70 rounded-2xl p-6 border border-hanji-300/80">
+              <span class="font-serif text-sm font-bold text-terracotta-500">03</span>
+              <h4 class="font-serif text-lg font-bold text-ink-900 mt-2 mb-2">마름질과 바느질</h4>
+              <p class="text-xs sm:text-sm text-ink-700 leading-relaxed">
+                개인의 체형 치수에 맞춰 본을 뜨고, 깨끼바느질과 감침질 등 전통 침선 기법으로 정교하게 꿰맵니다.
+              </p>
+            </div>
+            <div class="bg-hanji-100/70 rounded-2xl p-6 border border-hanji-300/80">
+              <span class="font-serif text-sm font-bold text-terracotta-500">04</span>
+              <h4 class="font-serif text-lg font-bold text-ink-900 mt-2 mb-2">가봉 및 완성</h4>
+              <p class="text-xs sm:text-sm text-ink-700 leading-relaxed">
+                직접 착용한 상태에서 깃의 여밈과 치마 길이를 세밀히 다듬어 몸에 가장 편안한 선을 완성합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Career & Exhibition Timeline (Clean Minimalist Table Style) -->
+        <div class="bg-hanji-100/60 rounded-3xl p-7 sm:p-10 border border-hanji-300/80">
+          <h3 class="font-serif text-xl sm:text-2xl font-bold text-ink-900 mb-6">주요 이력 및 전시</h3>
+          <div class="divide-y divide-hanji-300/70 text-sm sm:text-base">
+            <div class="py-4 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-8">
+              <span class="font-serif font-bold text-terracotta-500 w-24 shrink-0">2024 – 현재</span>
+              <span class="text-ink-900 font-medium">맞춤 한복 아틀리에 ‘결(GYEOL)’ 디렉터</span>
+            </div>
+            <div class="py-4 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-8">
+              <span class="font-serif font-bold text-terracotta-500 w-24 shrink-0">2023</span>
+              <span class="text-ink-900 font-medium">서울공예박물관 기획전 《결을 잇다: 현대 한복의 미학》 초청 참여</span>
+            </div>
+            <div class="py-4 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-8">
+              <span class="font-serif font-bold text-terracotta-500 w-24 shrink-0">2021</span>
+              <span class="text-ink-900 font-medium">파리 한국문화원 한복 패션쇼 ‘바람의 선(Line of Wind)’ 메인 디자이너</span>
+            </div>
+            <div class="py-4 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-8">
+              <span class="font-serif font-bold text-terracotta-500 w-24 shrink-0">2018</span>
+              <span class="text-ink-900 font-medium">전통복식디자인 전공 석사 졸업 및 국가무형유산 침선장 전수 과정 수료</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Page Navigation -->
+        <div class="mt-14 pt-8 border-t border-hanji-300 flex items-center justify-between gap-4">
+          <button onclick="navigateTo('home')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-hanji-300 bg-hanji-50 text-ink-700 text-sm font-medium hover:border-ink-900 transition-colors">
+            <span>←</span>
+            <span>이전: 홈</span>
+          </button>
+          <span class="hidden sm:inline text-xs text-ink-500">02 / 04 · 자기소개</span>
+          <button onclick="navigateTo('works')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink-900 text-hanji-50 text-sm font-medium hover:bg-terracotta-500 transition-colors">
+            <span>다음 페이지: 작품소개</span>
+            <span>→</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- PAGE 3: 작품소개 (WORKS - CLEAN GALLERY WITH FILTERS & MODAL) -->
+    <!-- =================================================================== -->
+    <section id="page-works" class="page-view bg-hanji-50/90">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+        
+        <!-- Clean Page Header & Filter Tabs -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-hanji-300 pb-8 mb-12 gap-6">
+          <div>
+            <span class="text-xs font-semibold tracking-[0.2em] text-terracotta-500 uppercase block mb-2">03 · SELECTED WORKS</span>
+            <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-ink-900">작품소개</h1>
+            <p class="mt-3 text-base text-ink-500">
+              원단의 결, 자연의 색, 고운 여백을 담아 지은 대표 컬렉션입니다.
+            </p>
+          </div>
+
+          <!-- Category Filter Tabs -->
+          <div class="flex flex-wrap gap-2" role="tablist" aria-label="작품 카테고리 필터">
+            <button onclick="filterWorks('all')" data-filter="all" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-ink-900 text-hanji-50">
+              전체
+            </button>
+            <button onclick="filterWorks('traditional')" data-filter="traditional" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-hanji-100 text-ink-700 border border-hanji-300 hover:border-ink-900">
+              전통 한복
+            </button>
+            <button onclick="filterWorks('modern')" data-filter="modern" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-hanji-100 text-ink-700 border border-hanji-300 hover:border-ink-900">
+              모던·생활 한복
+            </button>
+            <button onclick="filterWorks('wedding')" data-filter="wedding" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-hanji-100 text-ink-700 border border-hanji-300 hover:border-ink-900">
+              혼례·예복
+            </button>
+          </div>
+        </div>
+
+        <!-- Works Portfolio Grid -->
+        <div id="works-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Populated dynamically via JS for clean modal inspection -->
+        </div>
+
+        <!-- Bottom Page Navigation -->
+        <div class="mt-16 pt-8 border-t border-hanji-300 flex items-center justify-between gap-4">
+          <button onclick="navigateTo('about')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-hanji-300 bg-hanji-50 text-ink-700 text-sm font-medium hover:border-ink-900 transition-colors">
+            <span>←</span>
+            <span>이전: 자기소개</span>
+          </button>
+          <span class="hidden sm:inline text-xs text-ink-500">03 / 04 · 작품소개</span>
+          <button onclick="navigateTo('closing')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink-900 text-hanji-50 text-sm font-medium hover:bg-terracotta-500 transition-colors">
+            <span>다음 페이지: 마지막 말</span>
+            <span>→</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- PAGE 4: 마지막 말 (CLOSING WORDS - CLEAN LETTER & CONTACT) -->
+    <!-- =================================================================== -->
+    <section id="page-closing" class="page-view bg-hanji-50/90">
+      <div class="max-w-4xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+        
+        <!-- Clean Page Header -->
+        <div class="border-b border-hanji-300 pb-8 mb-12">
+          <span class="text-xs font-semibold tracking-[0.2em] text-terracotta-500 uppercase block mb-2">04 · CLOSING WORDS & CONTACT</span>
+          <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-ink-900">마지막 말</h1>
+          <p class="mt-3 text-base text-ink-500">
+            당신의 가장 고운 날에 함께할 한 벌의 옷을 기다리며
+          </p>
+        </div>
+
+        <!-- Designer's Heartfelt Closing Letter Card -->
+        <article class="bg-hanji-100/80 rounded-3xl p-8 sm:p-12 border border-hanji-300/90 shadow-sm mb-14 relative">
+          <div class="max-w-2xl mx-auto space-y-6">
+            <p class="font-serif text-xl sm:text-2xl font-bold text-ink-900 leading-relaxed">
+              “옷을 짓는 일은 결국,<br />그 옷을 입을 사람의 시간을 축복하는 일입니다.”
+            </p>
+
+            <div class="space-y-4 text-sm sm:text-base text-ink-700 leading-[1.85]">
+              <p>
+                바쁘게 흘러가는 현대의 일상 속에서 잠시 걸음을 늦추고, 옷고름을 단정히 매는 짧은 순간의 고요함을 사랑합니다. 한복은 단순히 특별한 날에만 꺼내 입는 예복을 넘어, 우리 고유의 미감과 정서를 가장 가까이에서 느낄 수 있는 따뜻한 문화입니다.
+              </p>
+              <p>
+                저의 작업실을 찾아주시는 한 분 한 분의 이야기와 체형, 그리고 그날의 계절을 세심히 듣고 담아내겠습니다. 시간이 흘러 다시 꺼내 보아도 변치 않는 기품과 편안함으로 남는 한복을 짓겠습니다.
+              </p>
+              <p>
+                귀한 발걸음으로 저의 작은 작업 공간을 둘러봐 주셔서 진심으로 감사드립니다.
+              </p>
+            </div>
+
+            <!-- Designer Signature & Red Seal (낙관) -->
+            <div class="pt-6 border-t border-hanji-300/80 flex items-center justify-end gap-4">
+              <div class="text-right">
+                <span class="block text-xs text-ink-500">아틀리에 결 드림</span>
+                <span class="font-serif text-lg sm:text-xl font-bold text-ink-900 tracking-wide">한복 디자이너 윤 서 연</span>
+              </div>
+              <!-- Traditional Red Vermilion Seal Graphic -->
+              <div class="w-12 h-12 rounded-md border-2 border-terracotta-500 bg-terracotta-500/10 flex flex-col items-center justify-center text-terracotta-500 font-serif font-black text-xs leading-tight select-none" title="디자이너 낙관">
+                <span>윤서</span>
+                <span>연인</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Clean Studio Info & Consultation Inquiry Form -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          
+          <!-- Left: Studio Location & Contact Info (5 cols) -->
+          <div class="md:col-span-5 bg-hanji-100/60 rounded-3xl p-7 border border-hanji-300/80 space-y-6">
+            <div>
+              <h2 class="font-serif text-xl font-bold text-ink-900 mb-2">아틀리에 결 작업실</h2>
+              <p class="text-xs sm:text-sm text-ink-500 leading-relaxed">
+                맞춤 제작 및 대여 상담은 프라이빗한 진행을 위해 100% 사전 예약제로 운영됩니다.
+              </p>
+            </div>
+
+            <div class="space-y-4 text-sm">
+              <div>
+                <span class="block text-xs font-semibold text-gold-600 mb-0.5">위치</span>
+                <p class="text-ink-900">서울특별시 종로구 자하문로 12길 24, 2층 (서촌 아틀리에)</p>
+              </div>
+              <div>
+                <span class="block text-xs font-semibold text-gold-600 mb-0.5">운영 시간</span>
+                <p class="text-ink-900">화 – 일 10:30 – 19:00 (매주 월요일 정기 휴무)</p>
+              </div>
+              <div>
+                <span class="block text-xs font-semibold text-gold-600 mb-0.5">연락처 & 채널</span>
+                <p class="text-ink-900">02-734-0918 · gyeol.hanbok@atelier.kr</p>
+                <p class="text-ink-500 text-xs mt-1">Instagram @atelier_gyeol</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Clean Consultation Inquiry Form (7 cols) -->
+          <div class="md:col-span-7 bg-hanji-50 rounded-3xl p-7 sm:p-8 border border-hanji-300/90 shadow-sm">
+            <h2 class="font-serif text-xl font-bold text-ink-900 mb-1">맞춤 및 제작 문의</h2>
+            <p class="text-xs sm:text-sm text-ink-500 mb-6">원하시는 일정과 용도를 남겨주시면 확인 후 정성껏 답변드리겠습니다.</p>
+
+            <form id="inquiry-form" onsubmit="handleInquirySubmit(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="client-name" class="block text-xs font-medium text-ink-700 mb-1.5">성함</label>
+                  <input type="text" id="client-name" required placeholder="홍길동" class="w-full px-4 py-2.5 rounded-xl bg-hanji-100/70 border border-hanji-300 text-sm text-ink-900 focus:outline-none focus:border-terracotta-500" />
+                </div>
+                <div>
+                  <label for="client-contact" class="block text-xs font-medium text-ink-700 mb-1.5">연락처</label>
+                  <input type="text" id="client-contact" required placeholder="010-0000-0000" class="w-full px-4 py-2.5 rounded-xl bg-hanji-100/70 border border-hanji-300 text-sm text-ink-900 focus:outline-none focus:border-terracotta-500" />
+                </div>
+              </div>
+
+              <div>
+                <label for="inquiry-type" class="block text-xs font-medium text-ink-700 mb-1.5">문의 분야</label>
+                <select id="inquiry-type" class="w-full px-4 py-2.5 rounded-xl bg-hanji-100/70 border border-hanji-300 text-sm text-ink-900 focus:outline-none focus:border-terracotta-500">
+                  <option value="혼례·예복 맞춤">혼례·예복 맞춤</option>
+                  <option value="전통 한복 제작">전통 한복 제작</option>
+                  <option value="모던·생활 한복">모던·생활 한복</option>
+                  <option value="전시 및 협업 문의">전시 및 협업 문의</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="inquiry-msg" class="block text-xs font-medium text-ink-700 mb-1.5">문의 내용</label>
+                <textarea id="inquiry-msg" rows="3" required placeholder="예식 일정이나 원하시는 분위기를 편하게 적어주세요." class="w-full px-4 py-2.5 rounded-xl bg-hanji-100/70 border border-hanji-300 text-sm text-ink-900 focus:outline-none focus:border-terracotta-500"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-3 rounded-xl bg-terracotta-500 hover:bg-terracotta-600 text-hanji-50 text-sm font-medium transition-colors shadow-sm">
+                상담 문의 남기기
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- Bottom Page Navigation -->
+        <div class="mt-14 pt-8 border-t border-hanji-300 flex items-center justify-between gap-4">
+          <button onclick="navigateTo('works')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-hanji-300 bg-hanji-50 text-ink-700 text-sm font-medium hover:border-ink-900 transition-colors">
+            <span>←</span>
+            <span>이전: 작품소개</span>
+          </button>
+          <span class="hidden sm:inline text-xs text-ink-500">04 / 04 · 마지막 말</span>
+          <button onclick="navigateTo('home')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink-900 text-hanji-50 text-sm font-medium hover:bg-terracotta-500 transition-colors">
+            <span>처음으로 (홈)</span>
+            <span>⌂</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- WORK DETAIL MODAL (CLEAN POPUP) -->
+  <!-- ===================================================================== -->
+  <div id="work-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-ink-900/60 backdrop-blur-sm" onclick="closeWorkModal(event)">
+    <div class="bg-hanji-50 rounded-3xl max-w-2xl w-full overflow-hidden border border-hanji-300 shadow-2xl" onclick="event.stopPropagation()">
+      <div class="grid grid-cols-1 sm:grid-cols-12">
+        <div class="sm:col-span-6 h-64 sm:h-auto bg-hanji-200">
+          <img id="modal-img" src="" alt="작품 상세 이미지" class="w-full h-full object-cover oriental-warm-img" />
+        </div>
+        <div class="sm:col-span-6 p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span id="modal-cat" class="text-xs font-semibold text-terracotta-500">카테고리</span>
+              <button onclick="closeWorkModal()" aria-label="닫기" class="w-8 h-8 rounded-full bg-hanji-200 text-ink-700 hover:bg-ink-900 hover:text-hanji-50 flex items-center justify-center transition-colors">
+                ✕
+              </button>
+            </div>
+            <h3 id="modal-title" class="font-serif text-2xl font-bold text-ink-900 mb-3">작품명</h3>
+            <p id="modal-desc" class="text-sm text-ink-700 leading-relaxed mb-5">작품 설명</p>
+
+            <div class="space-y-2.5 pt-4 border-t border-hanji-200 text-xs">
+              <div class="flex justify-between">
+                <span class="text-ink-500">사용 원단</span>
+                <span id="modal-fabric" class="font-medium text-ink-900">명주, 옥사</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-ink-500">주요 배색</span>
+                <div id="modal-swatches" class="flex items-center gap-1.5"></div>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-ink-500">제작 연도</span>
+                <span id="modal-year" class="font-medium text-ink-900">2025</span>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="closeWorkModal(); navigateTo('closing');" class="mt-6 w-full py-2.5 rounded-xl bg-ink-900 hover:bg-terracotta-500 text-hanji-50 text-xs sm:text-sm font-medium transition-colors">
+            이 작품 스타일로 상담 문의하기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TOAST NOTIFICATION (NON-BLOCKING MESSAGE BOX) -->
+  <!-- ===================================================================== -->
+  <div id="toast-box" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-ink-900 text-hanji-50 px-5 py-3.5 rounded-2xl shadow-lg border border-gold-500/40 flex items-center gap-3 text-sm">
+      <span class="w-2 h-2 rounded-full bg-terracotta-500"></span>
+      <span id="toast-message">상담 문의가 접수되었습니다.</span>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- FOOTER -->
+  <!-- ===================================================================== -->
+  <footer class="bg-hanji-200/70 border-t border-hanji-300 py-8 px-5 sm:px-8 text-xs text-ink-500">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5">
+        <span class="font-serif font-bold text-ink-900">아틀리에 결 (ATELIER GYEOL)</span>
+        <span>·</span>
+        <span>한복 디자이너 윤서연</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <button onclick="navigateTo('home')" class="hover:text-ink-900">홈</button>
+        <button onclick="navigateTo('about')" class="hover:text-ink-900">자기소개</button>
+        <button onclick="navigateTo('works')" class="hover:text-ink-900">작품소개</button>
+        <button onclick="navigateTo('closing')" class="hover:text-ink-900">마지막 말</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT: 4-PAGE ROUTING, WORKS FILTER & INTERACTIONS -->
+  <!-- ===================================================================== -->
+  <script>
+    // Curated Hanbok Portfolio Works Data
+    const hanbokWorks = [
+      {
+        id: 1,
+        category: 'traditional',
+        categoryLabel: '전통 한복',
+        title: '달빛 백자 당의',
+        subtitle: '조선 중기 당의의 유려한 곡선을 살린 예복',
+        fabric: '진주 명주, 은박 문양, 생고사',
+        year: '2025',
+        colors: ['#F5F0E6', '#D5C7B2', '#8E9B8E'],
+        image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=900&q=85',
+        story: '은은한 백자의 빛깔을 닮은 아이보리 명주 위에 절제된 은박 문양을 수놓아 단아한 기품을 표현했습니다. 움직일 때마다 겹쳐지는 소매의 배래선이 고전적인 아름다움을 전합니다.'
+      },
+      {
+        id: 2,
+        category: 'wedding',
+        categoryLabel: '혼례·예복',
+        title: '연홍빛 봄날의 활옷',
+        subtitle: '천연 홍화 염색으로 물들인 신부 예복',
+        fabric: '천연 염색 숙고사, 금사 자수',
+        year: '2025',
+        colors: ['#C97A63', '#E8C5B0', '#C59B5F'],
+        image: 'https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=900&q=85',
+        story: '자극적인 원색 대신 홍화와 치자를 여러 번 겹쳐 염색해 따뜻하고 차분한 연홍빛을 완성했습니다. 인생의 새로운 시작을 축복하는 모란과 나비 자수를 소매 끝에 담았습니다.'
+      },
+      {
+        id: 3,
+        category: 'modern',
+        categoryLabel: '모던·생활 한복',
+        title: '서촌의 오후 철릭 원피스',
+        subtitle: '일상의 걸음에 편안히 스며드는 모던 한복',
+        fabric: '한산 모시, 워싱 코튼 린넨',
+        year: '2024',
+        colors: ['#7E8C7D', '#EAE3D5', '#4A403A'],
+        image: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=900&q=85',
+        story: '전통 무관의 복식인 철릭의 주름 구조를 현대적인 원피스 실루엣으로 재해석했습니다. 통기성이 뛰어난 모시와 부드러운 면 혼방을 사용해 계절의 바람을 온전히 느낄 수 있습니다.'
+      },
+      {
+        id: 4,
+        category: 'traditional',
+        categoryLabel: '전통 한복',
+        title: '청자빛 수묵 두루마기',
+        subtitle: '깊은 여백과 절제미를 담은 외출복',
+        fabric: '안동포, 천연 쪽 염색 명주',
+        year: '2024',
+        colors: ['#5E716A', '#2A2420', '#D6C7B4'],
+        image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=900&q=85',
+        story: '고려청자의 비색에서 영감을 받아 조색한 청자빛 두루마기입니다. 직선으로 떨어지는 깃과 고름의 비례를 정교하게 다듬어 차분하고 지적인 인상을 줍니다.'
+      },
+      {
+        id: 5,
+        category: 'wedding',
+        categoryLabel: '혼례·예복',
+        title: '고운 결 혼주 한복 한 벌',
+        subtitle: '양가 어머님의 품격을 높이는 은은한 배색',
+        fabric: '본견 양단, 손염색 옥사',
+        year: '2025',
+        colors: ['#B85D43', '#9BA89E', '#F4ECE1'],
+        image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85',
+        story: '따뜻한 토양빛의 테라코타 저고리와 차분한 비취색 치마를 매치하여 예식장의 조명 아래서도 얼굴빛이 화사하고 온화하게 빛나도록 디자인했습니다.'
+      },
+      {
+        id: 6,
+        category: 'modern',
+        categoryLabel: '모던·생활 한복',
+        title: '한지결 저고리 자켓',
+        subtitle: '현대 의복과 자유롭게 어우러지는 저고리 아우터',
+        fabric: '누빔 명주, 천연 황토 염색 면',
+        year: '2024',
+        colors: ['#C59B5F', '#FAF6F0', '#3D3530'],
+        image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=900&q=85',
+        story: '전통 저고리의 동정과 고름 디테일을 살리면서도 슬랙스나 롱스커트와 자연스럽게 어울리는 자켓형 저고리입니다. 가벼운 손누빔 안감을 더해 간절기에도 따뜻하게 착용할 수 있습니다.'
+      }
+    ];
+
+    // 1. Page Switching Logic (4 Distinct Pages)
+    function navigateTo(pageId) {
+      const validPages = ['home', 'about', 'works', 'closing'];
+      if (!validPages.includes(pageId)) pageId = 'home';
+
+      // Hide all pages
+      document.querySelectorAll('.page-view').forEach((el) => {
+        el.classList.remove('active', 'visible');
+      });
+
+      // Show selected page with smooth fade-in
+      const targetPage = document.getElementById(`page-${pageId}`);
+      if (targetPage) {
+        targetPage.classList.add('active');
+        requestAnimationFrame(() => {
+          targetPage.classList.add('visible');
+        });
+      }
+
+      // Update Desktop Navigation Active State
+      document.querySelectorAll('.nav-btn').forEach((btn) => {
+        if (btn.dataset.nav === pageId) {
+          btn.className = 'nav-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-terracotta-500 text-hanji-50 shadow-sm';
+        } else {
+          btn.className = 'nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all text-ink-700 hover:text-terracotta-500';
+        }
+      });
+
+      // Update Mobile Navigation Active State
+      document.querySelectorAll('.mobile-nav-btn').forEach((btn) => {
+        if (btn.dataset.nav === pageId) {
+          btn.className = 'mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-semibold bg-terracotta-500/15 text-terracotta-600 transition-colors';
+        } else {
+          btn.className = 'mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-ink-900 hover:bg-hanji-200 transition-colors';
+        }
+      });
+
+      // Scroll smoothly to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 2. Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const iconOpen = document.getElementById('icon-menu-open');
+      const iconClose = document.getElementById('icon-menu-close');
+      const isHidden = menu.classList.contains('hidden');
+
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        iconOpen.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+      } else {
+        menu.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+      }
+    }
+
+    // 3. Render & Filter Works Gallery (Page 3)
+    function renderWorks(filter = 'all') {
+      const grid = document.getElementById('works-grid');
+      grid.innerHTML = '';
+
+      const filtered = filter === 'all'
+        ? hanbokWorks
+        : hanbokWorks.filter((item) => item.category === filter);
+
+      filtered.forEach((work) => {
+        const card = document.createElement('article');
+        card.className = 'group cursor-pointer bg-hanji-50 rounded-3xl overflow-hidden border border-hanji-300/90 hover:border-gold-500 shadow-sm hover:shadow-md transition-all flex flex-col';
+        card.onclick = () => openWorkModal(work);
+
+        const swatchesHtml = work.colors
+          .map((hex) => `<span class="w-3.5 h-3.5 rounded-full border border-ink-900/15" style="background-color:${hex}"></span>`)
+          .join('');
+
+        card.innerHTML = `
+          <div class="relative aspect-[4/5] hanbok-fallback-bg overflow-hidden">
+            <img
+              src="${work.image}"
+              alt="${work.title}"
+              class="w-full h-full object-cover object-center oriental-warm-img group-hover:scale-105 transition-transform duration-700"
+              onerror="this.style.display='none'"
+            />
+            <div class="absolute top-4 left-4">
+              <span class="px-3 py-1 rounded-full bg-hanji-50/90 backdrop-blur-sm text-[11px] font-semibold text-ink-900 border border-hanji-300">
+                ${work.categoryLabel}
+              </span>
+            </div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-xl font-bold text-ink-900 group-hover:text-terracotta-500 transition-colors">
+                ${work.title}
+              </h3>
+              <p class="text-xs sm:text-sm text-ink-500 mt-1.5 leading-relaxed">
+                ${work.subtitle}
+              </p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-hanji-200 flex items-center justify-between">
+              <span class="text-xs text-ink-700">${work.fabric.split(',')[0]}</span>
+              <div class="flex items-center gap-1.5" title="주요 배색">
+                ${swatchesHtml}
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterWorks(category) {
+      document.querySelectorAll('.filter-btn').forEach((btn) => {
+        if (btn.dataset.filter === category) {
+          btn.className = 'filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-ink-900 text-hanji-50';
+        } else {
+          btn.className = 'filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-hanji-100 text-ink-700 border border-hanji-300 hover:border-ink-900';
+        }
+      });
+      renderWorks(category);
+    }
+
+    // 4. Work Detail Modal
+    function openWorkModal(work) {
+      document.getElementById('modal-img').src = work.image;
+      document.getElementById('modal-cat').textContent = work.categoryLabel;
+      document.getElementById('modal-title').textContent = work.title;
+      document.getElementById('modal-desc').textContent = work.story;
+      document.getElementById('modal-fabric').textContent = work.fabric;
+      document.getElementById('modal-year').textContent = work.year;
+
+      const swatchesContainer = document.getElementById('modal-swatches');
+      swatchesContainer.innerHTML = work.colors
+        .map((hex) => `<span class="w-4 h-4 rounded-full border border-ink-900/20" style="background-color:${hex}"></span>`)
+        .join('');
+
+      const modal = document.getElementById('work-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeWorkModal() {
+      const modal = document.getElementById('work-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // 5. Inquiry Form Submission with Toast Feedback
+    function showToast(msg) {
+      const toast = document.getElementById('toast-box');
+      document.getElementById('toast-message').textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3500);
+    }
+
+    function handleInquirySubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('client-name').value.trim();
+      showToast(`${name}님의 상담 문의가 정성껏 접수되었습니다.`);
+      e.target.reset();
+    }
+
+    // Initialize on Load
+    document.addEventListener('DOMContentLoaded', () => {
+      navigateTo('home');
+      renderWorks('all');
+    });
+  </script>
+</body>
+</html>
